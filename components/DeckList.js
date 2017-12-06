@@ -15,7 +15,6 @@ class DeckList extends Component {
     const { decks } = this.props
     return (
       <View>
-        <Text>DeckList View</Text>
         <FlatList
           data={decks}
           renderItem={this.renderDeckItem}
