@@ -17,26 +17,38 @@ function FlashcardsStatusBar({ backgroundColor, ...props }) {
   )
 }
 
-const Tabs = TabNavigator({
-  DeckList: {
-    screen: DeckList,
-    navigationOptions: {
-      tabBarLabel: 'MY DECKS',
-      tabBarIcon: () => (
-        <MaterialCommunityIcons name="cards-outline" size={30} color="black" />
-      )
+const Tabs = TabNavigator(
+  {
+    DeckList: {
+      screen: DeckList,
+      navigationOptions: {
+        tabBarLabel: 'MY DECKS',
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialCommunityIcons
+            name="cards-outline"
+            size={30}
+            color={tintColor}
+          />
+        )
+      }
+    },
+    NewDeck: {
+      screen: NewDeck,
+      navigationOptions: {
+        tabBarLabel: 'ADD DECK',
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome name="plus-square-o" size={30} color={tintColor} />
+        )
+      }
     }
   },
-  NewDeck: {
-    screen: NewDeck,
-    navigationOptions: {
-      tabBarLabel: 'ADD DECK',
-      tabBarIcon: () => (
-        <FontAwesome name="plus-square-o" size={30} color="black" />
-      )
+  {
+    animationEnabled: true,
+    tabBarOptions: {
+      activeTintColor: '#0080ff'
     }
   }
-})
+)
 
 export default class App extends React.Component {
   render() {
@@ -44,7 +56,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
           <FlashcardsStatusBar
-            backgroundColor={'#0980ff'}
+            backgroundColor={'#0080ff'}
             barStyle="light-content"
           />
           <Tabs />
