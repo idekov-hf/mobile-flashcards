@@ -8,6 +8,7 @@ import reducer from './reducers'
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
+import { blue } from './utils/colors'
 
 function FlashcardsStatusBar({ backgroundColor, ...props }) {
   return (
@@ -45,7 +46,7 @@ const Tabs = TabNavigator(
   {
     animationEnabled: true,
     tabBarOptions: {
-      activeTintColor: '#0080ff'
+      activeTintColor: blue
     }
   }
 )
@@ -56,7 +57,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
           <FlashcardsStatusBar
-            backgroundColor={'#0080ff'}
+            backgroundColor={blue}
             barStyle="light-content"
           />
           <Tabs />
