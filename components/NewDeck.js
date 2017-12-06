@@ -13,6 +13,9 @@ class NewDeck extends Component {
   state = {
     deckTitle: ''
   }
+  componentDidMount() {
+    console.log(this.props)
+  }
   render() {
     return (
       <KeyboardAvoidingView
@@ -48,7 +51,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 7,
     marginRight: 20,
-    marginLeft: 20
+    marginLeft: 20,
+    backgroundColor: 'white'
   },
   createButton: {
     backgroundColor: blue,

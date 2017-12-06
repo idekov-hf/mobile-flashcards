@@ -1,14 +1,27 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native'
 import { connect } from 'react-redux'
 
 class DeckList extends Component {
   renderDeckItem = ({ item }) => {
     return (
-      <View style={styles.deckListItem}>
+      <TouchableOpacity
+        style={styles.deckListItem}
+        onPress={() =>
+          this.props.navigation.navigate('IndividualDeck', {
+            deckTitle: item.title
+          })
+        }
+      >
         <Text style={styles.deckTitle}>{item.title}</Text>
         <Text style={styles.numQuestions}>{item.questions.length} cards</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
   render() {
@@ -27,6 +40,7 @@ class DeckList extends Component {
 
 const styles = StyleSheet.create({
   deckListItem: {
+    backgroundColor: 'white',
     padding: 30,
     borderBottomWidth: 1,
     justifyContent: 'center',
