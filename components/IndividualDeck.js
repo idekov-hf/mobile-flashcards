@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state, props) {
   const { deckTitle } = props.navigation.state.params
-  console.log(state[deckTitle])
   return {
     deck: state[deckTitle]
   }

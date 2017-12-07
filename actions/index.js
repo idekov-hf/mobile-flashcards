@@ -6,6 +6,14 @@ export function addDeck(title) {
   }
 }
 
+export const ADD_DECKS = 'ADD_DECKS'
+export function addDecks(decks) {
+  return {
+    type: ADD_DECKS,
+    decks
+  }
+}
+
 export const ADD_CARD = 'ADD_CARD'
 export function addCardToDeck(deckTitle, card) {
   return {

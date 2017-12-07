@@ -1,8 +1,11 @@
-import { ADD_DECK, ADD_CARD } from '../actions'
-import { testData } from '../utils/testData'
+import { ADD_DECKS, ADD_DECK, ADD_CARD } from '../actions'
 
-function decks(state = testData, action) {
+function decks(state = {}, action) {
   switch (action.type) {
+    case ADD_DECKS:
+      return {
+        ...action.decks
+      }
     case ADD_DECK:
       const { title } = action
       return {

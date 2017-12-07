@@ -7,8 +7,16 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
+import { getDecks } from '../utils/api'
+import { addDecks } from '../actions'
 
 class DeckList extends Component {
+  componentDidMount() {
+    getDecks().then(data => {
+      if (!data) return
+      this.props.dispatch(addDecks(data))
+    })
+  }
   renderDeckItem = ({ item }) => {
     return (
       <TouchableOpacity

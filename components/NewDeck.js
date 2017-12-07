@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
+import { saveDeckTitle } from '../utils/api'
 import { blue } from '../utils/colors'
 
 class NewDeck extends Component {
@@ -16,8 +17,12 @@ class NewDeck extends Component {
     deckTitle: ''
   }
   handleAddNewDeck = () => {
-    const { deckTitle } = this.state
+    const deckTitle = this.state.deckTitle.trim()
+
+    if (deckTitle === '') return
+
     this.props.dispatch(addDeck(deckTitle))
+    saveDeckTitle(deckTitle)
     this.props.navigation.navigate('IndividualDeck', {
       deckTitle
     })
