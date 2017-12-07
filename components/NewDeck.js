@@ -13,8 +13,11 @@ class NewDeck extends Component {
   state = {
     deckTitle: ''
   }
-  componentDidMount() {
-    console.log(this.props)
+  handleAddNewDeck = () => {
+    this.props.navigation.navigate('IndividualDeck', {
+      deckTitle: this.state.deckTitle
+    })
+    this.setState({ deckTitle: '' })
   }
   render() {
     return (
@@ -29,7 +32,10 @@ class NewDeck extends Component {
           value={this.state.deckTitle}
           placeholder="Enter deck title here"
         />
-        <TouchableOpacity style={styles.createButton}>
+        <TouchableOpacity
+          style={styles.createButton}
+          onPress={this.handleAddNewDeck}
+        >
           <Text style={styles.createButtonText}>Create Deck</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
