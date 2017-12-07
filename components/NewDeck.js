@@ -7,6 +7,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView
 } from 'react-native'
+import { connect } from 'react-redux'
+import { addDeck } from '../actions'
 import { blue } from '../utils/colors'
 
 class NewDeck extends Component {
@@ -14,8 +16,10 @@ class NewDeck extends Component {
     deckTitle: ''
   }
   handleAddNewDeck = () => {
+    const { deckTitle } = this.state
+    this.props.dispatch(addDeck(deckTitle))
     this.props.navigation.navigate('IndividualDeck', {
-      deckTitle: this.state.deckTitle
+      deckTitle
     })
     this.setState({ deckTitle: '' })
   }
@@ -77,4 +81,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default NewDeck
+export default connect()(NewDeck)
