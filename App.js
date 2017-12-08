@@ -9,6 +9,7 @@ import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
 import IndividualDeck from './components/IndividualDeck'
+import NewCard from './components/NewCard'
 import { blue } from './utils/colors'
 
 function FlashcardsStatusBar({ backgroundColor, ...props }) {
@@ -55,23 +56,27 @@ const Tabs = TabNavigator(
   }
 )
 
+const stackNavigationOptions = {
+  headerTintColor: 'white',
+  headerStyle: {
+    backgroundColor: blue
+  }
+}
+
 const Stack = StackNavigator({
   Home: {
     screen: Tabs,
-    navigationOptions: {
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: blue
-      }
-    }
+    navigationOptions: stackNavigationOptions
   },
   IndividualDeck: {
     screen: IndividualDeck,
+    navigationOptions: stackNavigationOptions
+  },
+  NewCard: {
+    screen: NewCard,
     navigationOptions: {
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: blue
-      }
+      ...stackNavigationOptions,
+      headerTitle: 'Add New Card'
     }
   }
 })

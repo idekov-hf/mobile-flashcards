@@ -21,7 +21,14 @@ class IndividualDeck extends Component {
           <Text style={styles.numQuestions}>{deck.questions.length} cards</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <TouchableOpacity style={styles.addCardButton}>
+          <TouchableOpacity
+            style={styles.addCardButton}
+            onPress={() =>
+              this.props.navigation.navigate('NewCard', {
+                deckTitle: deck.title
+              })
+            }
+          >
             <Text style={styles.addCardButtonText}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.startQuizButton}>
