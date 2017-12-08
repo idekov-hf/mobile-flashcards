@@ -10,6 +10,7 @@ import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
 import IndividualDeck from './components/IndividualDeck'
 import NewCard from './components/NewCard'
+import Quiz from './components/Quiz'
 import { blue } from './utils/colors'
 
 function FlashcardsStatusBar({ backgroundColor, ...props }) {
@@ -78,6 +79,10 @@ const Stack = StackNavigator({
       ...stackNavigationOptions,
       headerTitle: 'Add New Card'
     }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: stackNavigationOptions
   }
 })
 

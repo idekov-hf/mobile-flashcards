@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { blue, mustard1, mustard2 } from '../utils/colors'
+import { blue, mustard } from '../utils/colors'
 
 class IndividualDeck extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -31,7 +31,14 @@ class IndividualDeck extends Component {
           >
             <Text style={styles.addCardButtonText}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.startQuizButton}>
+          <TouchableOpacity
+            style={styles.startQuizButton}
+            onPress={() =>
+              this.props.navigation.navigate('Quiz', {
+                deckTitle: deck.title
+              })
+            }
+          >
             <Text style={styles.addCardButtonText}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
@@ -65,7 +72,7 @@ const styles = StyleSheet.create({
     marginLeft: 60
   },
   startQuizButton: {
-    backgroundColor: mustard1,
+    backgroundColor: mustard,
     width: 170,
     justifyContent: 'center',
     alignItems: 'center',
