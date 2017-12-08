@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 import { blue, green, red } from '../utils/colors'
 
 class Quiz extends Component {
+  state = {
+    currentCardIndex: 0,
+    isQuestion: true
+  }
   static navigationOptions = ({ navigation }) => {
     const { deckTitle } = navigation.state.params
     return {
@@ -10,17 +15,28 @@ class Quiz extends Component {
     }
   }
   render() {
+    const { cards } = this.props
+    const { currentCardIndex, isQuestion } = this.state
+    const currentCard = cards[currentCardIndex]
     return (
       <View style={{ flex: 1 }}>
-        <Text style={{ alignSelf: 'center', marginTop: 10 }}>1/2</Text>
-        <View style={{ flex: 1, alignItems: 'center' }}>
+        <Text
+          style={{ alignSelf: 'center', marginTop: 10 }}
+        >{`${currentCardIndex + 1}/${cards.length}`}</Text>
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
           <View style={styles.card}>
             <Text style={styles.cardText}>
-              Is this a long question with a lot of words in it?
+              {isQuestion ? currentCard.question : currentCard.answer}
             </Text>
           </View>
-          <TouchableOpacity>
-            <Text style={{ color: blue }}>See Answer</Text>
+          <TouchableOpacity
+            onPress={() => this.setState({ isQuestion: !isQuestion })}
+          >
+            <Text style={{ color: blue }}>
+              See {isQuestion ? 'Answer' : 'Question'}
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -44,7 +60,7 @@ class Quiz extends Component {
 
 const styles = StyleSheet.create({
   card: {
-    alignItems: 'center',
+    alignSelf: 'stretch',
     padding: 50,
     margin: 35,
     borderWidth: 1,
@@ -75,4 +91,11 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Quiz
+function mapStateToProps(state, { navigation }) {
+  const { deckTitle } = navigation.state.params
+  return {
+    cards: state[deckTitle].questions
+  }
+}
+
+export default connect(mapStateToProps)(Quiz)
