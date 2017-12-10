@@ -11,6 +11,7 @@ import NewDeck from './components/NewDeck'
 import IndividualDeck from './components/IndividualDeck'
 import NewCard from './components/NewCard'
 import Quiz from './components/Quiz'
+import Score from './components/Score'
 import { blue } from './utils/colors'
 
 function FlashcardsStatusBar({ backgroundColor, ...props }) {
@@ -83,6 +84,9 @@ const Stack = StackNavigator({
   Quiz: {
     screen: Quiz,
     navigationOptions: stackNavigationOptions
+  },
+  Score: {
+    screen: Score,
   }
 })
 

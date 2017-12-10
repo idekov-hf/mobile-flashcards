@@ -6,7 +6,8 @@ import { blue, green, red } from '../utils/colors'
 class Quiz extends Component {
   state = {
     currentCardIndex: 0,
-    isQuestion: true
+    isQuestion: true,
+    numCorrect: 0
   }
   static navigationOptions = ({ navigation }) => {
     const { deckTitle } = navigation.state.params
@@ -14,9 +15,25 @@ class Quiz extends Component {
       title: `${deckTitle} Quiz`
     }
   }
+  handleGradingButtonPress = (isCorrect) => {
+    let { currentCardIndex, numCorrect } = this.state
+    const totalCards = this.props.cards.length
+
+    if (isCorrect) numCorrect = ++numCorrect
+    currentCardIndex = ++currentCardIndex
+
+    if (currentCardIndex === totalCards) {
+      this.props.navigation.navigate('Score', {numCorrect, totalCards})
+    }
+
+    this.setState({
+      numCorrect: numCorrect % totalCards,
+      currentCardIndex: currentCardIndex % totalCards
+    })
+  }
   render() {
     const { cards } = this.props
-    const { currentCardIndex, isQuestion } = this.state
+    const { currentCardIndex, isQuestion, numCorrect } = this.state
     const currentCard = cards[currentCardIndex]
     return (
       <View style={{ flex: 1 }}>
@@ -44,11 +61,13 @@ class Quiz extends Component {
         >
           <TouchableOpacity
             style={[styles.gradingButtons, { backgroundColor: green }]}
+            onPress={() => this.handleGradingButtonPress(true)}
           >
             <Text style={styles.gradingButtonsText}>Correct</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.gradingButtons, { backgroundColor: red }]}
+            onPress={() => this.handleGradingButtonPress(false)}
           >
             <Text style={styles.gradingButtonsText}>Incorrect</Text>
           </TouchableOpacity>
@@ -86,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   gradingButtonsText: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'white'
   }
 })
