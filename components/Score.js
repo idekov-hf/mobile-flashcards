@@ -1,9 +1,15 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { NavigationActions } from 'react-navigation'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 import { mustard, blue, blue2 } from '../utils/colors'
 
 export default function({ navigation }) {
+  // User has completed a quiz
+  // Clear local notification for today
+  // Set new local notification for tomorrow
+  clearLocalNotification().then(setLocalNotification)
+
   const { numCorrect, totalCards } = navigation.state.params
   const score = `${Math.floor(numCorrect / totalCards * 100)}%`
   return (

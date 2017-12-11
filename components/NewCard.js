@@ -48,7 +48,7 @@ class NewCard extends Component {
           style={styles.createButton}
           onPress={this.handleAddNewQuestion}
         >
-          <Text style={styles.createButtonText}>Create Deck</Text>
+          <Text style={styles.createButtonText}>Create Card</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     )
