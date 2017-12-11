@@ -17,7 +17,7 @@ export default function({ navigation }) {
           navigation.goBack()
         }}
       >
-        <Text style={styles.buttonText}>Start Over</Text>
+        <Text style={styles.buttonText}>Restart Quiz</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.button, { backgroundColor: blue }]}
