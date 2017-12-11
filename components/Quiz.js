@@ -28,11 +28,13 @@ class Quiz extends Component {
         totalCards,
         quizNavigationKey: this.props.navigation.state.key
       })
+      this.setState({ currentCardIndex: 0, numCorrect: 0 })
+      return
     }
 
     this.setState({
-      numCorrect: numCorrect % totalCards,
-      currentCardIndex: currentCardIndex % totalCards
+      numCorrect: numCorrect,
+      currentCardIndex: currentCardIndex
     })
   }
   render() {
