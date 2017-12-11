@@ -11,7 +11,7 @@ class IndividualDeck extends Component {
     }
   }
   render() {
-    const { deck } = this.props
+    const { deck, numCards } = this.props
     return (
       <View style={styles.container}>
         <View
@@ -22,7 +22,7 @@ class IndividualDeck extends Component {
         </View>
         <View style={{ flex: 1 }}>
           <TouchableOpacity
-            style={styles.addCardButton}
+            style={[styles.button, { backgroundColor: blue }]}
             onPress={() =>
               this.props.navigation.navigate('NewCard', {
                 deckTitle: deck.title
@@ -32,12 +32,16 @@ class IndividualDeck extends Component {
             <Text style={styles.addCardButtonText}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.startQuizButton}
-            onPress={() =>
+            disabled={numCards === 0}
+            style={[
+              styles.button,
+              { backgroundColor: numCards === 0 ? 'gray' : mustard }
+            ]}
+            onPress={() => {
               this.props.navigation.navigate('Quiz', {
                 deckTitle: deck.title
               })
-            }
+            }}
           >
             <Text style={styles.addCardButtonText}>Start Quiz</Text>
           </TouchableOpacity>
@@ -60,19 +64,7 @@ const styles = StyleSheet.create({
     color: '#767676',
     fontSize: 30
   },
-  addCardButton: {
-    backgroundColor: blue,
-    width: 170,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-    padding: 15,
-    borderRadius: 7,
-    marginRight: 60,
-    marginLeft: 60
-  },
-  startQuizButton: {
-    backgroundColor: mustard,
+  button: {
     width: 170,
     justifyContent: 'center',
     alignItems: 'center',
@@ -91,7 +83,8 @@ const styles = StyleSheet.create({
 function mapStateToProps(state, props) {
   const { deckTitle } = props.navigation.state.params
   return {
-    deck: state[deckTitle]
+    deck: state[deckTitle],
+    numCards: state[deckTitle].questions.length
   }
 }
 
