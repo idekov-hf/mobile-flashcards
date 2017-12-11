@@ -87,6 +87,10 @@ const Stack = StackNavigator({
   },
   Score: {
     screen: Score,
+    navigationOptions: {
+      ...stackNavigationOptions,
+      headerTitle: 'Quiz Results'
+    }
   }
 })
 

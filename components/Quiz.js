@@ -15,7 +15,7 @@ class Quiz extends Component {
       title: `${deckTitle} Quiz`
     }
   }
-  handleGradingButtonPress = (isCorrect) => {
+  handleGradingButtonPress = isCorrect => {
     let { currentCardIndex, numCorrect } = this.state
     const totalCards = this.props.cards.length
 
@@ -23,7 +23,11 @@ class Quiz extends Component {
     currentCardIndex = ++currentCardIndex
 
     if (currentCardIndex === totalCards) {
-      this.props.navigation.navigate('Score', {numCorrect, totalCards})
+      this.props.navigation.navigate('Score', {
+        numCorrect,
+        totalCards,
+        quizNavigationKey: this.props.navigation.state.key
+      })
     }
 
     this.setState({
