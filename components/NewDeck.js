@@ -21,7 +21,7 @@ class NewDeck extends Component {
 
     if (deckTitle === '') return
 
-    this.props.dispatch(addDeck(deckTitle))
+    this.props.addDeck(deckTitle)
     saveDeckTitle(deckTitle)
     this.props.navigation.navigate('IndividualDeck', {
       deckTitle
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect()(NewDeck)
+export default connect(null, { addDeck })(NewDeck)
