@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
+import FlipCard from 'react-native-flip-card'
 import { blue, green, red } from '../utils/colors'
 
 class Quiz extends Component {
   state = {
     currentCardIndex: 0,
-    isQuestion: true,
+    showAnswer: false,
     numCorrect: 0
   }
   static navigationOptions = ({ navigation }) => {
@@ -39,7 +40,7 @@ class Quiz extends Component {
   }
   render() {
     const { cards } = this.props
-    const { currentCardIndex, isQuestion, numCorrect } = this.state
+    const { currentCardIndex, showAnswer, numCorrect } = this.state
     const currentCard = cards[currentCardIndex]
     return (
       <View style={{ flex: 1 }}>
@@ -49,16 +50,28 @@ class Quiz extends Component {
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <View style={styles.card}>
-            <Text style={styles.cardText}>
-              {isQuestion ? currentCard.question : currentCard.answer}
-            </Text>
-          </View>
+          <FlipCard
+            style={styles.card}
+            clickable={false}
+            flipHorizontal={true}
+            flipVertical={false}
+            flip={showAnswer}
+          >
+            {/* Face Side */}
+            <View style={styles.side}>
+              <Text style={styles.cardText}>{currentCard.question}</Text>
+            </View>
+            {/* Back Side */}
+            <View style={styles.side}>
+              <Text style={styles.cardText}>{currentCard.answer}</Text>
+            </View>
+          </FlipCard>
+
           <TouchableOpacity
-            onPress={() => this.setState({ isQuestion: !isQuestion })}
+            onPress={() => this.setState({ showAnswer: !showAnswer })}
           >
             <Text style={{ color: blue }}>
-              See {isQuestion ? 'Answer' : 'Question'}
+              See {showAnswer ? 'Question' : 'Answer'}
             </Text>
           </TouchableOpacity>
         </View>
@@ -88,7 +101,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 50,
     margin: 35,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: 'rgba(0,0,0,0.05)',
     borderRadius: 7,
     shadowRadius: 10,
@@ -98,6 +111,10 @@ const styles = StyleSheet.create({
       width: 0,
       height: 10
     }
+  },
+  side: {
+    flex: 1,
+    justifyContent: 'center'
   },
   cardText: {
     textAlign: 'center',
