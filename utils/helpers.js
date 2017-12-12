@@ -3,13 +3,13 @@ import { Notifications, Permissions } from 'expo'
 
 const NOTIFICATION_KEY = 'MobileFlashcards:Notifications'
 
-export function clearLocalNotification() {
+export const clearLocalNotification = () => {
   return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
     Notifications.cancelAllScheduledNotificationsAsync
   )
 }
 
-function createNotification() {
+const createNotification = () => {
   return {
     title: 'Study your flash cards',
     body: "Don't forget to study your decks today!",
@@ -25,7 +25,7 @@ function createNotification() {
   }
 }
 
-export function setLocalNotification() {
+export const setLocalNotification = () => {
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
     .then(data => {
