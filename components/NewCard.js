@@ -6,7 +6,8 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  Keyboard
+  Keyboard,
+  Alert
 } from 'react-native'
 import { connect } from 'react-redux'
 import { addCard } from '../actions'
@@ -19,12 +20,21 @@ class NewCard extends Component {
     answer: ''
   }
   handleAddNewQuestion = () => {
+    const { question, answer } = this.state
+    if (question.trim() === '' || answer.trim() === '') {
+      Alert.alert(
+        'Empty Question/Answer Field',
+        'Please fill in both question and answer fields :)',
+        [{ text: 'OK' }]
+      )
+      return
+    }
     Keyboard.dismiss()
     this.props.navigation.goBack()
     const { deckTitle } = this.props.navigation.state.params
     const newCard = {
-      question: this.state.question,
-      answer: this.state.answer
+      question: question,
+      answer: answer
     }
     this.props.dispatch(addCard(deckTitle, newCard))
     addCardToDeck(deckTitle, newCard)
