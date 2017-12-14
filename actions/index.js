@@ -1,4 +1,5 @@
-export const ADD_DECK = 'ADD_DECK'
+import { ADD_DECK, ADD_DECKS, ADD_CARD } from './types'
+
 export function addDeck(title) {
   return {
     type: ADD_DECK,
@@ -6,7 +7,6 @@ export function addDeck(title) {
   }
 }
 
-export const ADD_DECKS = 'ADD_DECKS'
 export function addDecks(decks) {
   return {
     type: ADD_DECKS,
@@ -14,7 +14,6 @@ export function addDecks(decks) {
   }
 }
 
-export const ADD_CARD = 'ADD_CARD'
 export function addCard(deckTitle, card) {
   return {
     type: ADD_CARD,
