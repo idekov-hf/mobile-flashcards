@@ -14,7 +14,7 @@ class DeckList extends Component {
   componentDidMount() {
     getDecks().then(data => {
       if (!data) return
-      this.props.dispatch(addDecks(data))
+      this.props.addDecks(data)
     })
   }
   renderDeckItem = ({ item }) => {
@@ -68,4 +68,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(DeckList)
+export default connect(mapStateToProps, { addDecks })(DeckList)
